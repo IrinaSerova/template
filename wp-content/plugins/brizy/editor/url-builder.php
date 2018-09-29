@@ -13,6 +13,11 @@ class Brizy_Editor_UrlBuilder {
 	protected $post;
 
 	/**
+	 * @var int
+	 */
+	protected $post_id;
+
+	/**
 	 * @var array
 	 */
 	protected $upload_dir;
@@ -21,24 +26,56 @@ class Brizy_Editor_UrlBuilder {
 	 * Brizy_Editor_UrlBuilder constructor.
 	 *
 	 * @param Brizy_Editor_Project|null $project
-	 * @param Brizy_Editor_Post|null $post
+	 * @param int|null $post_id
 	 */
-	public function __construct( $project = null, $post = null ) {
+	public function __construct( $project = null, $post_id = null ) {
 
-		$this->project    = $project;
-		$this->post       = $post;
+		$this->project = $project;
+		$this->post_id = $post_id;
+
 		$this->upload_dir = Brizy_Admin_UploadDir::getUploadDir( null, true );
 	}
 
+	/**
+	 * @return Brizy_Admin_UrlIterator
+	 */
+	public function compiler_url() {
+		return Brizy_Config::getCompilerUrls();
+	}
+
+
+	/**
+	 * @return Brizy_Admin_UrlIterator
+	 */
 	public function application_form_url() {
-		return sprintf( Brizy_Config::BRIZY_APPLICATION_FORM_URL, Brizy_Config::BRIZY_APPLICATION_FORM_ID, urlencode( $this->multipass_url() ) );
+
+		$form_url = sprintf( Brizy_Config::BRIZY_APPLICATION_FORM_URL, Brizy_Config::BRIZY_APPLICATION_FORM_ID, urlencode( $this->multipass_url() ) );
+
+		$urls = array();
+
+		foreach ( Brizy_Config::getEditorBaseUrls() as $url ) {
+			$urls[] = $url . $form_url;
+		}
+
+		return new Brizy_Admin_UrlIterator( $urls );
+	}
+
+	public function application_form_notification_url() {
+
+		$urls = array();
+
+		foreach ( Brizy_Config::getEditorBaseUrls() as $url ) {
+			$urls[] = $url . Brizy_Config::BRIZY_APPLICATION_FORM_NOTIFICATION_URL;
+		}
+
+		return new Brizy_Admin_UrlIterator( $urls );
 	}
 
 	/**
 	 * @param $post
 	 */
-	public function set_post( $post ) {
-		$this->post = $post;
+	public function set_post_id( $post_id ) {
+		$this->post_id = $post_id;
 	}
 
 	public function multipass_url() {
@@ -50,14 +87,14 @@ class Brizy_Editor_UrlBuilder {
 
 		$params = array();
 
-		if ( $this->post ) {
-			$params['brizy_post'] = ( (int) $this->post->get_parent_id() );
+		if ( $this->post_id ) {
+			$params['brizy_post'] = ( (int) $this->post_id );
 		}
 
 		// do not move this line
 		$params['brizy'] = $end_point;
 
-		return site_url( "?" . http_build_query( $params ) );
+		return add_query_arg( $params, home_url() );
 	}
 
 	/**
@@ -137,8 +174,8 @@ class Brizy_Editor_UrlBuilder {
 	 */
 	public function page_upload_path( $path = null, $post_id = null ) {
 
-		if ( is_null( $post_id ) && $this->post ) {
-			$post_id = $this->post->get_parent_id();
+		if ( is_null( $post_id ) && $this->post_id ) {
+			$post_id = (int) $this->post_id;
 		}
 
 		if ( $path ) {
@@ -198,9 +235,18 @@ class Brizy_Editor_UrlBuilder {
 	 * @return string
 	 */
 	public function external_media_url( $path = null ) {
-		$path = "/" . ltrim( $path, "/" );
+		if ( $path ) {
+			$path = "/" . ltrim( $path, "/" );
+		}
 
-		return Brizy_Config::MEDIA_IMAGE_URL . $path;
+		$url = Brizy_Config::MEDIA_IMAGE_URL . $path;
+
+		$urls = array();
+		foreach ( Brizy_Config::getEditorBaseUrls() as $baseUrl ) {
+			$urls[] = $baseUrl . $url;
+		}
+
+		return new Brizy_Admin_UrlIterator( $urls );
 	}
 
 	/**
@@ -223,7 +269,12 @@ class Brizy_Editor_UrlBuilder {
 			$path = "/" . ltrim( $path, "/" );
 		}
 
-		return sprintf( Brizy_Config::S3_ASSET_URL . $path, $template_slug, $template_version );
+		$urls = array();
+		foreach ( Brizy_Config::getStaticBrizyUrls() as $url ) {
+			$urls[] = sprintf( $url . $path, $template_slug, $template_version );
+		}
+
+		return new Brizy_Admin_UrlIterator( $urls );
 	}
 }
 

@@ -46,6 +46,8 @@ class Brizy_Languages_Texts
 			"Accordion" => __("Accordion", "brizy"),
 			"Row" => __("Row", "brizy"),
 			"Column" => __("Column", "brizy"),
+			"Rows" => __("Rows", "brizy"),
+			"Columns" => __("Columns", "brizy"),
 			"Add to cart" => __("Add to cart", "brizy"),
 			"Categories" => __("Categories", "brizy"),
 			"Pages" => __("Pages", "brizy"),
@@ -54,6 +56,9 @@ class Brizy_Languages_Texts
 			"Shortcode" => __("Shortcode", "brizy"),
 			"Menu" => __("Menu", "brizy"),
 			"Posts" => __("Posts", "brizy"),
+			"Archives" => __("Archives", "brizy"),
+			"Taxonomy" => __("Taxonomy", "brizy"),
+			"Pagination" => __("Pagination", "brizy"),
 			"Sidebar" => __("Sidebar", "brizy"),
 			//-> Reorder Blocks
 			"Reorder Blocks" => __("Reorder Blocks", "brizy"),
@@ -108,6 +113,7 @@ class Brizy_Languages_Texts
 			"Diamond" => __("Diamond", "brizy"),
 			"Square" => __("Square", "brizy"),
 			"Arrows" => __("Arrows", "brizy"),
+			"Arrows Spacing" => __("Arrows Spacing", "brizy"),
 			"Thin" => __("Thin", "brizy"),
 			"Heavy" => __("Heavy", "brizy"),
 			"Tail" => __("Tail", "brizy"),
@@ -121,6 +127,9 @@ class Brizy_Languages_Texts
 			"Auto" => __("Auto", "brizy"),
 			"Custom" => __("Custom", "brizy"),
 			"Full" => __("Full", "brizy"),
+		  
+			"Carousel" => __("Carousel", "brizy"),
+			"Swipe" => __("Swipe", "brizy"),
 		  
 			// Not Found
 			"Missing Element" => __("Missing Element", "brizy"),
@@ -153,7 +162,7 @@ class Brizy_Languages_Texts
 			"Overlay" => __("Overlay", "brizy"),
 			"Border" => __("Border", "brizy"),
 			//-> Settings
-			"Dynamic content" => __("Dynamic content", "brizy"),
+			"Dynamic Content" => __("Dynamic Content", "brizy"),
 			"Settings" => __("Settings", "brizy"),
 			//-> Duplicate & Delete
 			"Duplicate" => __("Duplicate", "brizy"),
@@ -348,9 +357,10 @@ class Brizy_Languages_Texts
 			//-> Image
 			"Style" => __("Style", "brizy"),
 			"Opacity" => __("Opacity", "brizy"),
+			"Contrast" => __("Contrast", "brizy"),
 			"Hue" => __("Hue", "brizy"),
-			"Brigh.." => __("Brigh..", "brizy"),
-			"Satur.." => __("Satur..", "brizy"),
+			"Brightness" => __("Brightness", "brizy"),
+			"Saturation" => __("Saturation", "brizy"),
 			//-> LightBox
 			"LightBox" => __("LightBox", "brizy"),
 			"Open in LightBox" => __("Open in LightBox", "brizy"),
@@ -380,6 +390,10 @@ class Brizy_Languages_Texts
 		  
 			// No matches found
 			"No matches found" => __("No matches found", "brizy"),
+		  
+			// Popup
+			"Popup" => __("Popup", "brizy"),
+			"Close" => __("Close", "brizy"),
 		  
 			// WordPress
 			"Query" => __("Query", "brizy"),
@@ -431,7 +445,7 @@ class Brizy_Languages_Texts
 			"Meta Value" => __("Meta Value", "brizy"),
 			"Modified" => __("Modified", "brizy"),
 			"Parent" => __("Parent", "brizy"),
-			"Comment count" => __("Comment count", "brizy"),
+			"Comment Count" => __("Comment Count", "brizy"),
 			"Filter By" => __("Filter By", "brizy"),
 			"Block" => __("Block", "brizy"),
 			"Make it Global" => __("Make it Global", "brizy"),
@@ -453,6 +467,9 @@ class Brizy_Languages_Texts
 			"Page Template" => __("Page Template", "brizy"),
 			"Toggle Menu" => __("Toggle Menu", "brizy"),
 			"Make it Nofollow" => __("Make it Nofollow", "brizy"),
+			"Dividers" => __("Dividers", "brizy"),
+			"Arrangement" => __("Arrangement", "brizy"),
+			"Repeat" => __("Repeat", "brizy"),
 		);
 	}
 

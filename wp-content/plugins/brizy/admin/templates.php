@@ -53,18 +53,12 @@ class Brizy_Admin_Templates {
 			add_action( 'wp_ajax_' . self::RULE_LIST_VEIW, array( $this, 'getTemplateRuleBox' ) );
 			add_action( 'wp_ajax_' . self::RULE_GROUP_LIST, array( $this, 'getGroupList' ) );
 			add_filter( 'post_row_actions', array( $this, 'removeRowActions' ), 10, 1 );
-			add_action( 'admin_enqueue_scripts', array( $this, 'action_register_static' ) );
 			add_action( 'admin_init', array( $this, 'addTemplateRoleCaps' ), 10000 );
-
+			add_action( 'admin_enqueue_scripts', array( $this, 'action_register_static' ) );
 		} elseif ( ! is_admin() && ! defined( 'DOING_AJAX' ) ) {
 			add_action( 'wp', array( $this, 'templateFrontEnd' ) );
 			add_action( 'template_include', array( $this, 'templateInclude' ), 20000 );
 		}
-
-		global $current_user;
-
-		//var_dump( $current_user );
-		//exit;
 	}
 
 	/**
@@ -82,6 +76,10 @@ class Brizy_Admin_Templates {
 
 	function action_register_static() {
 
+	    if ( is_customize_preview() || get_post_type() !== Brizy_Admin_Templates::CP_TEMPLATE ) {
+	        return;
+        }
+
 		wp_enqueue_script(
 			brizy()->get_slug() . '-hyperapp-js',
 			brizy()->get_url( 'admin/static/js/hyperapp.js' ),
@@ -95,6 +93,7 @@ class Brizy_Admin_Templates {
 			'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js',
 			array( 'jquery' )
 		);
+
 		wp_enqueue_script(
 			brizy()->get_slug() . '-rules',
 			brizy()->get_url( 'admin/static/js/rules.js' ),
@@ -563,6 +562,7 @@ class Brizy_Admin_Templates {
 		if ( ! $this->template ) {
 			return;
 		}
+
 		$pid = brizy_get_current_post_id();
 
 		$brizyPost = $this->template;

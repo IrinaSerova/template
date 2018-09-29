@@ -20,6 +20,12 @@ function testimonial_rotator_shortcode_metabox()
 		
 		<b>' . __('Randomize Testimonials', 'testimonial-rotator') . '</b><br />
 		[testimonial_rotator id="' . $post->ID . '" shuffle="true"]<br /><br />	
+		
+		<b>' . __('Show Aggregate Rating as Stars', 'testimonial-rotator') . '</b><br />
+		[testimonial_rotator_rating id="' . $post->ID . '"]<br /><br />	
+		
+		<b>' . __('Show Aggregate Rating as Number', 'testimonial-rotator') . '</b><br />
+		[testimonial_rotator_rating id="' . $post->ID . '" return="rating"]<br /><br />	
 	';
 }
 

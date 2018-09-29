@@ -71,8 +71,15 @@ Check out this [Help Guide](https://halgatewood.com/docs/plugins/testimonial-rot
 
 == Changelog ==
 
+= 2.5 & 2.5.1 - Sept. 25, 2018 =
+* NEW: testimonial_rotator_rating shortcode to show the aggregate rating only
+* NEW: Author information displayed on all testimonials page in admin
+* FIX: Logic for the hReview snippits was incorrect. Much more accurate now.
+* FIX: Single template layout will match the look of the rotator theme it belongs too. This may required changes to your single-testimonial.php file or you may need to create a single-testimonial.php file.
+* FIX: Sort Testimonials by title in admin
+* UPDATED: .pot file
+
 = 2.4 - Sept. 4, 2018 =
-* NEW: Setting to change the Testimonials archive page slug
 * FIX: Single templates not looking in the new Testimonial Theme Pack plugin.
 * REMOVED: Theme Pack Updating functionality. Now moved in to the Theme Pack plugin.
 

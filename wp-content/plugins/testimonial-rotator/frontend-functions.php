@@ -29,6 +29,7 @@ function testimonial_rotator_single( $content )
 		$has_image 			= has_post_thumbnail() ? "has-image" : false;
 		$template_name 		= get_post_meta( $rotator_id, '_template', true );
 		
+		$global_rating 		= 0;
 		
 		$rating 			= (int) get_post_meta( $testimonial_id, '_rating', true );
 		$title_heading 		= get_post_meta( $rotator_id, '_title_heading', true );
@@ -67,14 +68,20 @@ function testimonial_rotator_single( $content )
 			// NO CUSTOM TEMPLATE, MODIFY THE CONTENT
 			ob_start();
 			
-			$show_title = apply_filters('testimonial_rotator_single_show_title', false, $template_name, $testimonial_id, $rotator_id);
-			$show_image = apply_filters('testimonial_rotator_single_show_image', false, $template_name, $testimonial_id, $rotator_id);
+			$show_title = apply_filters('testimonial_rotator_single_show_title', true, $template_name, $testimonial_id, $rotator_id);
+			$show_image = apply_filters('testimonial_rotator_single_show_image', true, $template_name, $testimonial_id, $rotator_id);
 			$show_body = true;
 			$show_stars = true;
 			$show_author = true;
 			$show_microdata = true;
-
-			if( $template ) include( $template );
+			
+			if( $template ) 
+			{
+				echo '<div class="testimonial_rotator template-' . $template_name . '">';
+				include( $template );
+				echo '</div>';
+			}
+			
 			$output = ob_get_contents();
 			ob_end_clean();
 			return $output;

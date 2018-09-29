@@ -49,7 +49,7 @@ if( $show_microdata )
 	echo "	<div class=\"testimonial_rotator_microdata\">\n";
 	
 		if($itemreviewed) echo "\t<div class=\"item\"><div class=\"fn\">{$itemreviewed}</div></div>\n";
-		if($rating) echo "\t<div class=\"rating\">{$rating}.0</div>\n";
+		if($rating) echo "\t<div class=\"rating\">{$rating}</div>\n";
 		
 		echo "	<div class=\"dtreviewed\"> " . get_the_date('c') . "</div>";
 		echo "	<div class=\"reviewer\"> ";

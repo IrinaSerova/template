@@ -7,7 +7,7 @@ Author: Hal Gatewood
 Author URI: http://www.halgatewood.com
 Text Domain: testimonial-rotator
 Domain Path: /languages
-Version: 2.4
+Version: 2.5.1
 */
 
 
@@ -112,6 +112,8 @@ function testimonial_rotator_init()
 	add_shortcode( 'testimonial-rotator', 'testimonial_rotator_shortcode' );
 	add_shortcode( 'testimonial_single', 'testimonial_single_shortcode' );
 	add_shortcode( 'testimonial-single', 'testimonial_single_shortcode' );
+	
+	add_shortcode( 'testimonial_rotator_rating', 'testimonial_rotator_rating_shortcode' );
 
 	// POST THUMBNAILS (pippin)
 	if( !current_theme_supports('post-thumbnails') ) { add_theme_support('post-thumbnails'); }
@@ -416,6 +418,7 @@ function testimonial_rotator( $atts )
 	
 	$testimonials = new WP_Query( apply_filters( 'testimonial_rotator_display_args', $testimonials_args, $id ) );
 
+
 	// ROTATOR CLASSES
 	$cycle_class 						= ($format == "rotator") ? " cycletwo-slideshow" : "";
 	$rotator_class_prefix 				= ($is_widget) ? "_widget" : "";
@@ -466,12 +469,12 @@ function testimonial_rotator( $atts )
 	$extra_data_attributes = apply_filters( 'testimonial_rotator_data_attributes', '', $template_name, $id );
 
 	// RATING
-	$global_rating = 0;
+	$global_rating = $rating_count = 0;
 	
 	// USED FOR SINGLE TEMPLATE, WHEN ON TESTIMONIAL PAGE
 	$is_single_page = false;
 
-	if ( $testimonials->have_posts() )
+	if( $testimonials->have_posts() )
 	{
 		echo "<div id=\"testimonial_rotator{$rotator_class_prefix}_wrap_{$id}\" class=\"testimonial_rotator{$rotator_class_prefix}_wrap{$extra_wrap_class}\">\n";
 		echo "	<div id=\"testimonial_rotator{$rotator_class_prefix}_{$id}\" class=\"testimonial_rotator hreview-aggregate{$rotator_class_prefix}{$cycle_class}\" data-cycletwo-timeout=\"{$timeout}\" data-cycletwo-speed=\"{$speed}\" data-cycletwo-pause-on-hover=\"{$pause_on_hover}\" {$centered} data-cycletwo-swipe=\"{$touch_swipe}\" data-cycletwo-fx=\"{$fx}\" data-cycletwo-auto-height=\"{$auto_height}\" {$prevnextdata}data-cycletwo-slides=\"{$div_selector}\" data-cycletwo-log=\"{$log}\" {$extra_data_attributes}>\n";
@@ -522,6 +525,14 @@ function testimonial_rotator( $atts )
 			if(!$itemreviewed) 	$itemreviewed = get_post_meta( $id, '_itemreviewed', true );
 			$cite 				= get_post_meta( get_the_ID(), '_cite', true );
 			$rating 			= (int) get_post_meta( get_the_ID(), '_rating', true );
+			
+			// CALC GLOBAL RATING
+			if( $rating )
+			{
+				$rating_count++;
+				$global_rating += $rating;
+				$rating = $rating . '.0';
+			}
 
 			// LOAD TEMPLATE
 			if( $template ) include( $template );
@@ -533,14 +544,14 @@ function testimonial_rotator( $atts )
 
 		// GLOBAL RATING
 		$post_count = $testimonials->post_count;
-		$global_rating_number = floor($global_rating / $post_count);
+		$global_rating_number = ($rating_count != 0) ? round($global_rating / $rating_count, 1) : 0;
 
 		if( $global_rating_number AND $show_microdata )
 		{
 			echo "<div class=\"testimonial_rotator_microdata\">\n";
-			echo "\t<div class=\"rating\">{$global_rating_number}.0</div>\n";
-			echo "\t<div class=\"count\">{$post_count}</div>\n";
-			echo "</div>\n";
+			echo "\t<div class=\"rating\">{$global_rating_number}</div>\n";
+			echo "\t<div class=\"count\">{$rating_count}</div>\n";
+			echo "</div><!-- aggregate rating -->\n";
 		}
 
 		do_action( 'testimonial_rotator_after' );
@@ -565,9 +576,9 @@ function testimonial_rotator( $atts )
 				previous_posts_link( '<i class="fa fa-angle-double-left"></i> ' . __('Previous Testimonials', 'testimonial-rotator') );
 			echo "</div>\n";
 		}
-		
-		wp_reset_postdata();
 	}
+	
+	wp_reset_postdata();
 }
 
 
@@ -614,6 +625,77 @@ function testimonial_rotator_excerpt( $limit = 25, $more = null )
 }
 
 
+function testimonial_rotator_rating( $id = false, $return = 'stars' )
+{
+	if( !$id ) return false;
+	
+	global $post;
+	
+	$global_rating = $testimonial_count = 0;
+	
+	$testimonials_args 	= array( 'post_type' => 'testimonial', 'posts_per_page' => -1, 'meta_query' => testimonial_rotator_meta_query( $id ) );	
+	$testimonials 		= new WP_Query( apply_filters( 'testimonial_rotator_rating_display_args', $testimonials_args, $id ) );			
+				
+	if ( $testimonials->have_posts() )
+	{
+		while ( $testimonials->have_posts() )
+		{
+			$testimonials->the_post();	
+			$rating = (int) get_post_meta( get_the_ID(), '_rating', true );
+			
+			if( $rating )
+			{
+				$global_rating += $rating;
+				$testimonial_count++;
+			}
+		}
+	}
+
+	$global_rating_number = round($global_rating / $testimonial_count, 1);
+
+
+	// RETURN OPTIONS
+	if( $return == 'rating' )
+	{
+		return $global_rating_number;
+	}
+	else if( $return == 'data' )
+	{
+		$obj = new stdclass;
+		$obj->total_ratings 	= $testimonial_count;
+		$obj->rating 			= $global_rating_number;
+		return $obj;
+	}
+	else 
+	{
+		$global_rating_number = (int) $global_rating_number;
+		
+		$testimonial_rotator_star 	= apply_filters( 'testimonial_rotator_star', 'fa-star', 'rating', $id );
+		if( $testimonial_rotator_star != "" AND substr($testimonial_rotator_star,0,3) != "fa-" ) $testimonial_rotator_star = "fa-" . $testimonial_rotator_star;
+		
+		$rtn = "<span class=\"testimonial_rotator_stars cf-tr\">\n";
+		for($r=1; $r <= $global_rating_number; $r++)
+		{
+			$rtn = $rtn . "<span class=\"testimonial_rotator_star testimonial_rotator_star_$r\"><i class=\"fa {$testimonial_rotator_star}\"></i></span>";
+		}
+		$rtn = $rtn . "</span>\n";
+		return $rtn;
+	}
+
+	return $global_rating_number;
+}
+
+
+function testimonial_rotator_rating_shortcode( $atts )
+{
+	$id = 0;
+	if( isset($atts['id']) ) $id = (int) $atts['id'];
+	if( !$id ) return false;
+	
+	$return = isset($atts['return']) ? $atts['return'] : null;
+	if( $return == "data" ) $return = null;
+	return testimonial_rotator_rating( $id, $return );
+}
 
 // WIDGET
 require_once( TESTIMONIAL_ROTATOR_DIR . 'widget.php' );

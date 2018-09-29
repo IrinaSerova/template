@@ -3,13 +3,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Testimonial Rotator 2.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/testimonial-rotator\n"
-"POT-Creation-Date: 2017-12-08 23:14+0000\n"
+"POT-Creation-Date: 2018-09-25 07:01+0000\n"
 "POT-Revision-Date: Tue Jan 12 2016 15:31:11 GMT-0600 (CST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,131 +21,131 @@ msgstr ""
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
-"X-Generator: Loco - https://localise.biz/"
+"X-Generator: Loco https://localise.biz/"
 
-#: frontend-functions.php:80 testimonial-rotator.php:496
+#: frontend-functions.php:91 testimonial-rotator.php:510
 #, php-format
 msgid "The template: %s could be found"
 msgstr ""
 
-#: frontend-functions.php:100
+#: frontend-functions.php:111
 msgid "View Full"
 msgstr ""
 
-#: frontend-functions.php:112
+#: frontend-functions.php:123
 msgid "Something unknown went wrong"
 msgstr ""
 
-#: testimonial-rotator.php:121 testimonial-rotator.php:133
+#: testimonial-rotator.php:130 testimonial-rotator.php:142
 msgid "Testimonials"
 msgstr ""
 
-#: testimonial-rotator.php:122
+#: testimonial-rotator.php:131
 msgid "Testimonial"
 msgstr ""
 
-#: testimonial-rotator.php:123 testimonial-rotator.php:157
-#: admin/admin-functions.php:206 admin/admin-functions.php:206
+#: testimonial-rotator.php:132 testimonial-rotator.php:166
+#: admin/admin-functions.php:213 admin/admin-functions.php:213
 msgid "Add New"
 msgstr ""
 
-#: testimonial-rotator.php:124
+#: testimonial-rotator.php:133
 msgid "Add New Testimonial"
 msgstr ""
 
-#: testimonial-rotator.php:125
+#: testimonial-rotator.php:134
 msgid "Edit Testimonial"
 msgstr ""
 
-#: testimonial-rotator.php:126
+#: testimonial-rotator.php:135
 msgid "New Testimonial"
 msgstr ""
 
-#: testimonial-rotator.php:127
+#: testimonial-rotator.php:136
 msgid "All Testimonials"
 msgstr ""
 
-#: testimonial-rotator.php:128
+#: testimonial-rotator.php:137
 msgid "View Testimonial"
 msgstr ""
 
-#: testimonial-rotator.php:129
+#: testimonial-rotator.php:138
 msgid "Search Testimonials"
 msgstr ""
 
-#: testimonial-rotator.php:130
+#: testimonial-rotator.php:139
 msgid "No testimonials found"
 msgstr ""
 
-#: testimonial-rotator.php:131
+#: testimonial-rotator.php:140
 msgid "No testimonials found in Trash"
 msgstr ""
 
-#: testimonial-rotator.php:155
+#: testimonial-rotator.php:164
 msgid "Testimonial Rotators"
 msgstr ""
 
-#: testimonial-rotator.php:156 widget.php:53 widget.php:67
+#: testimonial-rotator.php:165 widget.php:53 widget.php:67
 #: admin/admin-functions.php:53 admin/admin-functions.php:65
 msgid "Rotator"
 msgstr ""
 
-#: testimonial-rotator.php:158
+#: testimonial-rotator.php:167
 msgid "Add New Rotator"
 msgstr ""
 
-#: testimonial-rotator.php:159
+#: testimonial-rotator.php:168
 msgid "Edit Rotator"
 msgstr ""
 
-#: testimonial-rotator.php:160
+#: testimonial-rotator.php:169
 msgid "New Rotator"
 msgstr ""
 
-#: testimonial-rotator.php:161 widget.php:55
+#: testimonial-rotator.php:170 widget.php:55
 msgid "All Rotators"
 msgstr ""
 
-#: testimonial-rotator.php:162
+#: testimonial-rotator.php:171
 msgid "View Rotator"
 msgstr ""
 
-#: testimonial-rotator.php:163
+#: testimonial-rotator.php:172
 msgid "Search Rotators"
 msgstr ""
 
-#: testimonial-rotator.php:164
+#: testimonial-rotator.php:173
 msgid "No rotators found"
 msgstr ""
 
-#: testimonial-rotator.php:165
+#: testimonial-rotator.php:174
 msgid "No rotators found in Trash"
 msgstr ""
 
-#: testimonial-rotator.php:167 admin/admin-functions.php:205
-#: admin/admin-functions.php:205
+#: testimonial-rotator.php:176 admin/admin-functions.php:212
+#: admin/admin-functions.php:212
 msgid "Rotators"
 msgstr ""
 
-#: testimonial-rotator.php:240
+#: testimonial-rotator.php:249
 msgid "Testimonial is not a testimonial post type"
 msgstr ""
 
-#: testimonial-rotator.php:245
+#: testimonial-rotator.php:254
 #, php-format
 msgid "Testimonial could not be found with ID: %d"
 msgstr ""
 
-#: testimonial-rotator.php:271
+#: testimonial-rotator.php:281
 #, php-format
 msgid "Rotator could not be found with ID: %d"
 msgstr ""
 
-#: testimonial-rotator.php:553
+#: testimonial-rotator.php:575
 msgid "Next Testimonials"
 msgstr ""
 
-#: testimonial-rotator.php:554
+#: testimonial-rotator.php:576
 msgid "Previous Testimonials"
 msgstr ""
 
@@ -201,23 +201,23 @@ msgstr ""
 msgid "Rotator Default"
 msgstr ""
 
-#: widget.php:125 admin/metaboxes-rotator.php:80
+#: widget.php:125 admin/metaboxes-rotator.php:86
 msgid "Transition Effect"
 msgstr ""
 
-#: widget.php:135 admin/metaboxes-rotator.php:89
+#: widget.php:135 admin/metaboxes-rotator.php:95
 msgid "Image Size"
 msgstr ""
 
-#: widget.php:140 admin/metaboxes-rotator.php:94
+#: widget.php:140 admin/metaboxes-rotator.php:100
 msgid "Seconds per Testimonial"
 msgstr ""
 
-#: widget.php:145 admin/metaboxes-rotator.php:99
+#: widget.php:145 admin/metaboxes-rotator.php:105
 msgid "Transition Speed (in seconds)"
 msgstr ""
 
-#: widget.php:150 admin/metaboxes-rotator.php:109
+#: widget.php:150 admin/metaboxes-rotator.php:115
 msgid "Element for Title Field"
 msgstr ""
 
@@ -237,15 +237,15 @@ msgid "No"
 msgstr ""
 
 #: widget.php:159 admin/metaboxes-rotator.php:21
-#: admin/metaboxes-rotator.php:117
+#: admin/metaboxes-rotator.php:123
 msgid "Randomize Testimonials"
 msgstr ""
 
-#: widget.php:168 admin/metaboxes-rotator.php:122
+#: widget.php:168 admin/metaboxes-rotator.php:128
 msgid "Vertical Align (Center Testimonials Height)"
 msgstr ""
 
-#: widget.php:177 admin/metaboxes-rotator.php:127
+#: widget.php:177 admin/metaboxes-rotator.php:133
 msgid "Show Previous/Next Buttons"
 msgstr ""
 
@@ -261,35 +261,35 @@ msgstr ""
 msgid "Read more, View Full, etc."
 msgstr ""
 
-#: widget.php:216 admin/metaboxes-rotator.php:132
+#: widget.php:216 admin/metaboxes-rotator.php:138
 msgid "Hide Featured Image"
 msgstr ""
 
-#: widget.php:225 admin/metaboxes-rotator.php:137
+#: widget.php:225 admin/metaboxes-rotator.php:143
 msgid "Hide Title"
 msgstr ""
 
-#: widget.php:234 admin/metaboxes-rotator.php:142
+#: widget.php:234 admin/metaboxes-rotator.php:148
 msgid "Hide Stars"
 msgstr ""
 
-#: widget.php:243 admin/metaboxes-rotator.php:147
+#: widget.php:243 admin/metaboxes-rotator.php:153
 msgid "Hide Body"
 msgstr ""
 
-#: widget.php:252 admin/metaboxes-rotator.php:152
+#: widget.php:252 admin/metaboxes-rotator.php:158
 msgid "Hide Author"
 msgstr ""
 
-#: widget.php:261 admin/metaboxes-rotator.php:157
+#: widget.php:261 admin/metaboxes-rotator.php:163
 msgid "Hide Microdata (hReview)"
 msgstr ""
 
-#: widget.php:267 admin/metaboxes-rotator.php:164
+#: widget.php:267 admin/metaboxes-rotator.php:170
 msgid "Name of Item Being Reviewed:"
 msgstr ""
 
-#: widget.php:268 admin/metaboxes-rotator.php:165
+#: widget.php:268 admin/metaboxes-rotator.php:171
 msgid "Company Name, Product Name, etc."
 msgstr ""
 
@@ -325,8 +325,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: admin/admin-functions.php:51 admin/admin-functions.php:64
-#: admin/admin-functions.php:99
+#: admin/admin-functions.php:51 admin/admin-functions.php:101
 msgid "Title"
 msgstr ""
 
@@ -338,115 +337,122 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: admin/admin-functions.php:55
+#: admin/admin-functions.php:55 admin/metaboxes-testimonial.php:44
+msgid "Author Information"
+msgstr ""
+
+#: admin/admin-functions.php:56
 msgid "Shortcode"
 msgstr ""
 
-#: admin/admin-functions.php:89
+#: admin/admin-functions.php:91
 msgid "Display as Single"
 msgstr ""
 
-#: admin/admin-functions.php:100
+#: admin/admin-functions.php:102
 msgid "Theme"
 msgstr ""
 
-#: admin/admin-functions.php:101
+#: admin/admin-functions.php:103
 msgid "Testimonial Count"
 msgstr ""
 
-#: admin/admin-functions.php:102
+#: admin/admin-functions.php:104
+msgid "Aggregate Rating"
+msgstr ""
+
+#: admin/admin-functions.php:105
 msgid "Shortcodes"
 msgstr ""
 
-#: admin/admin-functions.php:112
+#: admin/admin-functions.php:115
 msgid "Use Rotator Settings"
 msgstr ""
 
-#: admin/admin-functions.php:115
+#: admin/admin-functions.php:118
 msgid "Display as List"
 msgstr ""
 
-#: admin/admin-functions.php:182 admin/admin-functions.php:182
-#: admin/admin-functions.php:269 admin/admin-functions.php:269
+#: admin/admin-functions.php:189 admin/admin-functions.php:276
+#: admin/admin-functions.php:276
 msgid "Add Rotator"
 msgstr ""
 
-#: admin/admin-functions.php:186 admin/admin-functions.php:186
-#: admin/admin-functions.php:247
+#: admin/admin-functions.php:193 admin/admin-functions.php:254
 msgid "Settings"
 msgstr ""
 
-#: admin/admin-functions.php:245
+#: admin/admin-functions.php:252
 msgid "Donate"
 msgstr ""
 
-#: admin/admin-functions.php:246
-msgid "Themes"
+#: admin/admin-functions.php:253
+msgid "Theme Pack"
 msgstr ""
 
-#: admin/admin-functions.php:305
+#: admin/admin-functions.php:312
 msgid "Choose a Rotator"
 msgstr ""
 
-#: admin/admin-functions.php:313
+#: admin/admin-functions.php:320
 msgid ""
 "No rotators have been created yet. Please create one first and then you will "
 "be able to select it here."
 msgstr ""
 
-#: admin/admin-functions.php:316
+#: admin/admin-functions.php:323
 msgid "Insert Rotator"
 msgstr ""
 
-#: admin/admin-functions.php:317 admin/admin-functions.php:317
+#: admin/admin-functions.php:324
 msgid "Cancel"
 msgstr ""
 
-#: admin/admin-settings.php:11
+#: admin/admin-settings.php:12
 msgid "Testimonial Rotator Settings"
 msgstr ""
 
-#: admin/admin-settings.php:34
+#: admin/admin-settings.php:35
 msgid "Error Handling"
 msgstr ""
 
-#: admin/admin-settings.php:35
+#: admin/admin-settings.php:36
 msgid "Who Sees Rotator Menu?"
 msgstr ""
 
-#: admin/admin-settings.php:36
+#: admin/admin-settings.php:37
 msgid "Hide Font Awesome?"
 msgstr ""
 
-#: admin/admin-settings.php:37
-msgid "Register for Updates"
+#: admin/admin-settings.php:38
+msgid "Archive Slug"
 msgstr ""
 
-#: admin/admin-settings.php:38
+#: admin/admin-settings.php:39
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/admin-settings.php:45
+#: admin/admin-settings.php:46
 msgid "Settings Updated"
 msgstr ""
 
-#: admin/admin-settings.php:54
+#: admin/admin-settings.php:55
 msgid "Hidden in Source"
 msgstr ""
 
-#: admin/admin-settings.php:55
+#: admin/admin-settings.php:56
 msgid "Display if Admin"
 msgstr ""
 
-#: admin/admin-settings.php:56
+#: admin/admin-settings.php:57
 msgid "Display for Anyone"
 msgstr ""
 
-#: admin/admin-settings.php:59
+#: admin/admin-settings.php:60
 msgid "What should the plugin do when there is an error?"
 msgstr ""
 
-#: admin/admin-settings.php:77
+#: admin/admin-settings.php:78
 msgid ""
 "Select the roles that will be able to see the Rotator List View and 'Add "
 "New' Button in the admin menu."
@@ -458,78 +464,20 @@ msgid ""
 "off our version here."
 msgstr ""
 
-#: admin/admin-settings.php:97
-msgid "Defined in wp-config"
+#: admin/admin-settings.php:100
+msgid "Value has already been set in a filter: "
 msgstr ""
 
-#: admin/admin-settings.php:103
-msgid "This is used to update your plugin when new versions become available."
+#: admin/admin-settings.php:111
+msgid ""
+"This is the slug that will be used for the Testimonials custom post type "
+"archive page."
 msgstr ""
 
-#: admin/admin-settings.php:105
-msgid "Insert the email address you used to purchase the themes."
-msgstr ""
-
-#: admin/admin-settings.php:108
-msgid "Check out the themes available"
-msgstr ""
-
-#: admin/admin-settings.php:122
+#: admin/admin-settings.php:126
 msgid ""
 "This custom CSS will get inserted after the testimonial rotator CSS is "
 "loaded so you can override the styles."
-msgstr ""
-
-#: admin/metaboxes-rotator.php:12
-msgid "Base Rotator"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:15
-msgid "List All Testimonials"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:18
-msgid "Limit Results to 10 and list"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:104
-msgid "Limit Number of Testimonials"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:165
-msgid "not visible on your website, used for search engines"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:190
-msgid "Select a Theme:"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:198
-msgid "Use"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:204
-msgid "Go"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:215
-msgid "Make a Custom Template:"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:216
-msgid "To create custom layouts for this rotator create a file called"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:217
-msgid "and place it in your theme."
-msgstr ""
-
-#: admin/metaboxes-rotator.php:284
-msgid "View in Edit List"
-msgstr ""
-
-#: admin/metaboxes-rotator.php:288
-msgid "No testimonials have been associated to this rotator yet."
 msgstr ""
 
 #: admin/metaboxes-testimonial.php:20
@@ -555,24 +503,78 @@ msgstr ""
 msgid "Don't Show"
 msgstr ""
 
-#: admin/metaboxes-testimonial.php:44
-msgid "Author Information:"
-msgstr ""
-
 #: admin/metaboxes-testimonial.php:45
 msgid ""
 "Company Name, Credentials, etc. (this info shows below the author's "
 "testimonial by default)"
 msgstr ""
 
+#: admin/metaboxes-rotator.php:12
+msgid "Base Rotator"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:15
+msgid "List All Testimonials"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:18
+msgid "Limit Results to 10 and list"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:24
+msgid "Show Aggregate Rating as Stars"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:27
+msgid "Show Aggregate Rating as Number"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:110
+msgid "Limit Number of Testimonials"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:171
+msgid "not visible on your website, used for search engines"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:196
+msgid "Select a Theme:"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:204
+msgid "Use"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:210
+msgid "Go"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:221
+msgid "Make a Custom Template:"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:222
+msgid "To create custom layouts for this rotator create a file called"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:223
+msgid "and place it in your theme."
+msgstr ""
+
+#: admin/metaboxes-rotator.php:290
+msgid "View in Edit List"
+msgstr ""
+
+#: admin/metaboxes-rotator.php:294
+msgid "No testimonials have been associated to this rotator yet."
+msgstr ""
+
 #. Plugin Name of the plugin/theme
 msgid "Testimonial Rotator"
 msgstr ""
 
-#. Description of the plugin/theme
-msgid ""
-"A handy plugin for WordPress developers to add testimonials to their site. "
-"Enough functionality to be helpful and also stays out of your way."
+#. Description of the plugin
+msgid "The best way to add testimonials to your WordPress site."
 msgstr ""
 
 #. Plugin URI of the plugin/theme

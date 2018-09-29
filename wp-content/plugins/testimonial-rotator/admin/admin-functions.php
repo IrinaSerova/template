@@ -51,7 +51,8 @@ function testimonial_rotator_columns( $columns )
 		'title'    		=> __('Title', 'testimonial-rotator'),
 		'rating'    	=> __('Rating', 'testimonial-rotator'),
 		'ID'       		=> __('Rotator', 'testimonial-rotator'),
-		'order'    		=> __('Order', 'testimonial-rotator'),	
+		'order'    		=> __('Order', 'testimonial-rotator'),
+		'author_info'   => __('Author Information', 'testimonial-rotator'),
 		'shortcode' 	=> __('Shortcode', 'testimonial-rotator')
 	);
 
@@ -61,8 +62,8 @@ function testimonial_rotator_columns( $columns )
 function testimonial_rotator_column_sort($columns)
 {
 	$columns = array(
-		'title'    => __('Title', 'testimonial-rotator'),
 		'ID'       => __('Rotator', 'testimonial-rotator'),
+		'title'    => 'title',
 		'order'    => 'menu_order'
 	);
 
@@ -80,11 +81,12 @@ function testimonial_rotator_add_columns( $column, $post_id )
 
 	$this_testimonial = get_post($post_id);
 
-	if ( $column == 'ID' ) 		{ echo implode(", ", $rotator_title_array); }
-	if ( $column == 'image' ) 		echo '<a href="' . $edit_link . '">' . get_the_post_thumbnail( $post_id, array( 50, 50 ) ) . '</a>';
-	if ( $column == 'order' ) 		echo '<a href="' . $edit_link . '">' . $this_testimonial->menu_order . '</a>';
-	if ( $column == 'rating' ) 		echo get_post_meta( $post_id, "_rating", true );
-	if ( $column == 'shortcode' ) 	
+	if ( $column == 'ID' ) 					echo implode(", ", $rotator_title_array);
+	else if ( $column == 'image' ) 			echo '<a href="' . $edit_link . '">' . get_the_post_thumbnail( $post_id, array( 50, 50 ) ) . '</a>';
+	else if ( $column == 'order' ) 			echo '<a href="' . $edit_link . '">' . $this_testimonial->menu_order . '</a>';
+	else if ( $column == 'rating' ) 		echo get_post_meta( $post_id, "_rating", true );
+	else if ( $column == 'author_info' ) 	echo get_post_meta( $post_id, "_cite", true );
+	else if ( $column == 'shortcode' ) 	
 	{ 
 		echo '<b>' . __('Display as Single' , 'testimonial-rotator') . '</b><br />'; 
 		echo '[testimonial_single id="' . $post_id . '"]';
@@ -99,6 +101,7 @@ function testimonial_rotator_rotator_columns( $columns )
 		'title'    		=> __('Title', 'testimonial-rotator'),
 		'theme'    		=> __('Theme', 'testimonial-rotator'),
 		'count'    		=> __('Testimonial Count', 'testimonial-rotator'),
+		'aggregate'    	=> __('Aggregate Rating', 'testimonial-rotator'),
 		'shortcode'		=> __('Shortcodes', 'testimonial-rotator')
 	);
 
@@ -121,7 +124,11 @@ function testimonial_rotator_rotator_add_columns( $column, $post_id )
 		$theme = get_post_meta( $post_id, '_template', true );
 		if(!$theme) $theme = "default";
 		echo ucwords($theme);
-	}									
+	}
+	else if ( $column == 'aggregate' )  
+	{
+		echo testimonial_rotator_rating( $post_id, 'rating' );
+	}					
 	else if ( $column == 'count' )  	
 	{
 		$meta_query = array( 'relation' => 'OR',

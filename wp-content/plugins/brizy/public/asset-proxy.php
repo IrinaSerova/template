@@ -47,7 +47,7 @@ class Brizy_Public_AssetProxy extends Brizy_Public_AbstractProxy {
 		$brizyPost = Brizy_Editor_Post::get( (int) $vars[ self::ENDPOINT_POST ] );
 
 		if ( $brizyPost->uses_editor() ) {
-			$this->url_builder->set_post( $brizyPost );
+			$this->url_builder->set_post_id( $brizyPost->get_parent_id() );
 		}
 
 		$endpoint_value = $wp_query->query_vars[ self::ENDPOINT ];
@@ -77,7 +77,6 @@ class Brizy_Public_AssetProxy extends Brizy_Public_AbstractProxy {
 			// send headers
 			$headers                   = array();
 			$headers['Content-Type']   = $this->get_mime( $new_path, 1 );
-			$headers['Content-Length'] = strlen( $content );
 			$headers['Cache-Control']  = 'max-age=600';
 
 			foreach ( $headers as $key => $val ) {

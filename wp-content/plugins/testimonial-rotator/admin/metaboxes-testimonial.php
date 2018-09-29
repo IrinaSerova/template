@@ -41,7 +41,7 @@ function testimonial_rotator_metabox_select()
 	</div>
 	
 	<p>
-		<label for="cite"><?php _e('Author Information:', 'testimonial-rotator'); ?></label><br>
+		<label for="cite"><?php _e('Author Information', 'testimonial-rotator'); ?></label><br>
 		<small><?php _e("Company Name, Credentials, etc. (this info shows below the author's testimonial by default)", 'testimonial-rotator'); ?></small>
 	</p>
 	

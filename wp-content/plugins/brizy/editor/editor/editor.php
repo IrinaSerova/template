@@ -51,7 +51,7 @@ class Brizy_Editor_Editor_Editor {
 	public function __construct( $project, $post = null ) {
 		$this->post       = $post;
 		$this->project    = $project;
-		$this->urlBuilder = new Brizy_Editor_UrlBuilder( $project, $post );
+		$this->urlBuilder = new Brizy_Editor_UrlBuilder( $project, $post ? $post->get_parent_id() : null );
 	}
 
 	/**
@@ -115,9 +115,9 @@ class Brizy_Editor_Editor_Editor {
 			'serverTimestamp' => time(),
 			'urls'            => array(
 				'api'                 => home_url( '/wp-json/v1' ),
-				'base'                => Brizy_Config::EDITOR_BASE_URL,
+				'base'                => Brizy_Config::getEditorBaseUrls()."",
 				'integration'         => Brizy_Config::EDITOR_INTEGRATION_URL,
-				'image'               => Brizy_Config::MEDIA_IMAGE_URL,
+				'image'               => $this->urlBuilder->external_media_url()."",
 				'origin'              => Brizy_Config::EDITOR_ORIGIN_URL,
 				'pagePreview'         => $preview_post_link,
 				'pluginSettings'      => admin_url( 'admin.php?page=' . Brizy_Admin_Settings::menu_slug() ),
@@ -125,9 +125,9 @@ class Brizy_Editor_Editor_Editor {
 				'backToWordpress'     => get_edit_post_link( $wp_post_id, null ),
 				'assets'              => $this->urlBuilder->editor_asset_url(),
 				'pageAssets'          => $this->urlBuilder->page_upload_url(),
-				'blockThumbnails'     => $this->urlBuilder->external_asset_url( 'template/img-block-thumbs' ),
+				'blockThumbnails'     => $this->urlBuilder->external_asset_url( 'template/img-block-thumbs' )."",
 				'templateIcons'       => $this->urlBuilder->proxy_url( 'template/icons' ),
-				'site'                => site_url()
+				'site'                => home_url()
 			),
 			'user'            => array( 'role' => 'admin' ),
 			'wp'              => array(
@@ -136,7 +136,6 @@ class Brizy_Editor_Editor_Editor {
 				'featuredImage'   => $post_thumbnail,
 				'pageAttachments' => array( 'images' => $this->get_page_attachments() ),
 				'templates'       => $templates,
-				'taxonomies'      => $this->getTaxonomyList(),
 				'api'             => array(
 					'hash'                       => wp_create_nonce( Brizy_Editor_API::nonce ),
 					'url'                        => set_url_scheme( admin_url( 'admin-ajax.php' ) ),
@@ -182,7 +181,7 @@ class Brizy_Editor_Editor_Editor {
 					'wpApiUrl'  => set_url_scheme( admin_url( 'admin-ajax.php' ) ),
 					'submitUrl' => set_url_scheme( admin_url( 'admin-ajax.php' ) ) . "?action=brizy_submit_form"
 				)
-			)
+			),
 		);
 
 		return self::$config = apply_filters( 'brizy_editor_config', $config );
@@ -255,9 +254,11 @@ class Brizy_Editor_Editor_Editor {
 	}
 
 	/**
-	 * @param WP_Post $wp_post
+	 * @param $wp_post
 	 *
 	 * @return null|string
+	 * @throws Brizy_Editor_Exceptions_NotFound
+	 * @throws Brizy_Editor_Exceptions_UnsupportedPostType
 	 */
 	private function getPreviewUrl( $wp_post ) {
 
@@ -378,7 +379,7 @@ class Brizy_Editor_Editor_Editor {
 								//return addQueryStringToUrl( get_post_permalink( new WP_Post((object)array("ID"=>time())) ), 'preview=1' );
 								break;
 							case 'front_page':
-								return addQueryStringToUrl( site_url(), 'preview=1' );
+								return addQueryStringToUrl( home_url(), 'preview=1' );
 								break;
 						}
 
@@ -394,28 +395,5 @@ class Brizy_Editor_Editor_Editor {
 		) );
 	}
 
-	private function getTaxonomyList() {
 
-		$taxs = get_taxonomies( array( 'public' => true, 'show_ui' => true ), 'objects' );
-
-		$result = array_map( function ( $tax ) {
-
-			$terms = (array) get_terms( array( 'taxonomy' => $tax->name, 'hide_empty' => false ) );
-
-			return (object) array(
-				'name'  => $tax->name,
-				'label' => $tax->labels->name,
-				'terms' => array_map( function ( $term ) {
-					return (object) array(
-						'id'   => $term->term_id,
-						'name' => $term->name,
-					);
-				}, $terms )
-			);
-
-		}, $taxs );
-
-
-		return array_values( $result );
-	}
 }

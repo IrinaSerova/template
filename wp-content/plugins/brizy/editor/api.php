@@ -172,8 +172,6 @@ class Brizy_Editor_API {
 
 	public function default_form() {
 		try {
-			add_action( 'wp_ajax_' . self::RULE_CREATE, array( $this, 'getGroupList' ) );
-
 
 			$current_user = wp_get_current_user();
 			$form         = new Brizy_Editor_Forms_Form();
@@ -277,7 +275,7 @@ class Brizy_Editor_API {
 
 			// send email
 			$headers   = array();
-			$headers[] = 'Content-type: text/html; charset=utf-8';
+			$headers[] = 'Content-type: text/html; charset=UTF-8';
 
 			$field_string = array();
 			foreach ( $fields as $field ) {
@@ -331,9 +329,10 @@ class Brizy_Editor_API {
 
 			$email                = $user->getPlatformUserEmail();
 			$secret               = $user->getPlatformUserSignature();
-			$platform_credentials = Brizy_Editor_API_Platform::getCredentials();
+			$platformCredentials = Brizy_Editor_API_Platform::getCredentials();
+			$urlBuilder           = new Brizy_Editor_UrlBuilder( Brizy_Editor_Project::get() );
 
-			$platform_client_id = $platform_credentials->client_id;
+			$platform_client_id = $platformCredentials->client_id;
 
 			date_default_timezone_set( "UTC" );
 
@@ -349,7 +348,7 @@ class Brizy_Editor_API {
 
 			$token = $multipass->encode( $user_data );
 
-			$redirect_uri = sprintf( Brizy_Config::BRIZY_PLATFORM_MULTIPASS_LOGIN, $platform_client_id, $token, $email );
+			$redirect_uri = sprintf( Brizy_Config::getEditorBaseUrls() . Brizy_Config::BRIZY_PLATFORM_MULTIPASS_LOGIN, $platform_client_id, $token, $email );
 
 			wp_redirect( $redirect_uri );
 			exit;
@@ -360,7 +359,7 @@ class Brizy_Editor_API {
 		}
 	}
 
-	public function update_form_integration_status() {
+	public function update_form_integrations_status() {
 
 		try {
 
@@ -924,7 +923,7 @@ class Brizy_Editor_API {
 			$apost   = (int) $_REQUEST['post_id'];
 			$post    = Brizy_Editor_Post::get( $apost );
 
-			$media_cacher = new Brizy_Editor_CropCacheMedia( $project, $post );
+			$media_cacher = new Brizy_Editor_CropCacheMedia( $project, $post->get_parent_id() );
 			$media_cacher->download_original_image( $_REQUEST['media'] );
 
 			wp_send_json( array(), 200 );
