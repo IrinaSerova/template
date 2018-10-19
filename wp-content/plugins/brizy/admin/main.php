@@ -28,6 +28,7 @@ class Brizy_Admin_Main {
 		// watch all supported posts and create meta revisions
 		$metaManager = new Brizy_Admin_Post_RevisionManager();
 		$metaManager->addMonitor( new Brizy_Admin_Post_BrizyPostsMonitor() );
+		$metaManager->addMonitor( new Brizy_Admin_Post_ProjectPostMonitor() );
 
 		// enqueue admin scripts
 		add_action( 'admin_enqueue_scripts', array( $this, 'action_register_static' ) );
@@ -45,7 +46,8 @@ class Brizy_Admin_Main {
 				$this,
 				'action_change_template'
 			) ); // action to change template from editor
-			add_action( 'edit_form_after_title', array(
+
+            add_action( 'edit_form_after_title', array(
 				$this,
 				'action_add_enable_disable_buttons'
 			) ); // add button to enable disable editor
@@ -62,10 +64,6 @@ class Brizy_Admin_Main {
 		add_filter( 'display_post_states', array( $this, 'display_post_states' ), 10, 2 );
 
 		add_filter( 'save_post', array( $this, 'save_post' ), 10, 2 );
-
-		if ( function_exists( 'gutenberg_init' ) ) {
-			add_action( 'admin_print_scripts-edit.php', array( $this, 'add_edit_button_to_gutenberg' ), 12 );
-		}
 	}
 
 	/**
@@ -75,7 +73,6 @@ class Brizy_Admin_Main {
 		try {
 
 			$bpost = Brizy_Editor_Post::get( $post );
-
 
 			$urlBuilder = new Brizy_Editor_UrlBuilder( Brizy_Editor_Project::get(), $bpost->get_parent_id() );
 
@@ -138,7 +135,7 @@ class Brizy_Admin_Main {
 	public function hide_editor() {
 
 		$post_type = get_post_type();
-		if ( in_array( $post_type, brizy()->supported_post_types() ) ) {
+		if ( in_array( $post_type, Brizy_Editor::get()->supported_post_types() ) ) {
 			$p = get_post();
 
 			try {
@@ -164,31 +161,6 @@ class Brizy_Admin_Main {
 		}
 	}
 
-	public function add_edit_button_to_gutenberg() {
-		global $typenow;
-
-		$new_post_url = add_query_arg( array(
-			'action'    => 'brizy_new_post',
-			'post_type' => $typenow,
-		), set_url_scheme( admin_url( 'edit.php' ) ) );
-
-		?>
-        <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function () {
-                var dropdown = document.querySelector('#split-page-title-action .dropdown');
-
-                if (!dropdown) {
-                    return;
-                }
-
-                var url = '<?php echo esc_attr( $new_post_url ); ?>';
-
-                dropdown.insertAdjacentHTML('afterbegin', '<a href="' + url + '">Brizy</a>');
-            });
-        </script>
-		<?php
-	}
-
 	public function plugin_action_links( $links ) {
 		$settings_link = sprintf( '<a href="%s">%s</a>', admin_url( 'admin.php?page=' . Brizy_Admin_Settings::menu_slug() ), __( 'Settings', 'brizy' ) );
 		array_unshift( $links, $settings_link );
@@ -202,24 +174,24 @@ class Brizy_Admin_Main {
 	public function action_register_static() {
 
 		wp_enqueue_style(
-			brizy()->get_slug() . '-admin-css',
-			brizy()->get_url( 'admin/static/css/style.css' )
+			Brizy_Editor::get()->get_slug() . '-admin-css',
+			Brizy_Editor::get()->get_url( 'admin/static/css/style.css' )
 		);
 		wp_enqueue_style(
-			brizy()->get_slug() . '-select2',
+			Brizy_Editor::get()->get_slug() . '-select2',
 			'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css'
 		);
 
 		wp_enqueue_script(
-			brizy()->get_slug() . '-admin-js',
-			brizy()->get_url( 'admin/static/js/script.js' ),
+			Brizy_Editor::get()->get_slug() . '-admin-js',
+			Brizy_Editor::get()->get_url( 'admin/static/js/script.js' ),
 			array( 'jquery', 'underscore' ),
-			brizy()->get_version(),
+			Brizy_Editor::get()->get_version(),
 			true
 		);
 
 		wp_localize_script(
-			brizy()->get_slug() . '-admin-js',
+			Brizy_Editor::get()->get_slug() . '-admin-js',
 			'Brizy_Admin_Data',
 			array(
 				'url'         => set_url_scheme( admin_url( 'admin-ajax.php' ) ),
@@ -281,9 +253,7 @@ class Brizy_Admin_Main {
 
 		try {
 			Brizy_Editor_Post::get( $p->ID )->set_template( $_REQUEST['template'] );
-
 			wp_redirect( Brizy_Editor_Post::get( $p->ID )->edit_url() );
-
 		} catch ( Brizy_Editor_Exceptions_Exception $exception ) {
 			Brizy_Admin_Flash::instance()->add_error( 'Unable to disabled the editor. Please try again later.' );
 		}
@@ -294,7 +264,7 @@ class Brizy_Admin_Main {
 	 **/
 	public function action_add_enable_disable_buttons() {
 		$get_post_type        = get_post_type();
-		$supported_post_types = brizy()->supported_post_types();
+		$supported_post_types = Brizy_Editor::get()->supported_post_types();
 		if ( in_array( $get_post_type, $supported_post_types ) ) {
 			$p = get_post();
 
@@ -328,7 +298,7 @@ class Brizy_Admin_Main {
 
 		$is_allowed = Brizy_Editor::is_user_allowed();
 
-		if ( ! $is_allowed || ! in_array( get_post_type(), brizy()->supported_post_types() ) ) {
+		if ( ! $is_allowed || ! in_array( get_post_type(), Brizy_Editor::get()->supported_post_types() ) ) {
 			return $actions;
 		}
 
@@ -406,7 +376,7 @@ class Brizy_Admin_Main {
 
 			if ( false === strpos( $p->post_content, 'brz-root__container' ) ) {
 				$p->post_content .= '<div class="brz-root__container"></div>';
-				$update_post = true;
+				$update_post     = true;
 			}
 
 			if ( $update_post ) {
@@ -415,6 +385,7 @@ class Brizy_Admin_Main {
 
 			$post->enable_editor();
 			$post->set_template( Brizy_Config::BRIZY_BLANK_TEMPLATE_FILE_NAME );
+			$post->set_plugin_version( BRIZY_VERSION );
 			$post->save();
 
 			// redirect
